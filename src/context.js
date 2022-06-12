@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
   const [searchTearm, setSearchTerm] = useState("a");
   const [cocktails, setCocktails] = useState([]);
 
-  const fetchDrinks = async () => {
+  const fetchDrinks = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${url}${searchTearm}`);
@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
       console.log("error");
       setLoading(false);
     }
-  };
+  },[searchTearm]);
   useEffect(() => {
     fetchDrinks();
   }, [searchTearm]);
